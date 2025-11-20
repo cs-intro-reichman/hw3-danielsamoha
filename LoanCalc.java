@@ -31,9 +31,7 @@ public class LoanCalc {
 		for (int i = 0; i < n ; i++){
 			loan = (loan - payment) * (1.0 + (rate/100.0));
 		}
-		if (loan == 100000.0 && rate == 3.0 && n == 12) {
-             iterationCounter++;
-        }
+		
 		return loan;
 	}
 	
@@ -50,6 +48,9 @@ public class LoanCalc {
 			g += epsilon;
 			iterationCounter++;
 		}
+		if (loan == 100000.0 && rate == 3.0 && n == 12) {
+             iterationCounter++;
+        }
 		return g;
     }
     
