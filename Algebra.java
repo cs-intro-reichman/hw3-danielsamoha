@@ -78,6 +78,11 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+		Boolean pos = false;
+		if((x > 0)){
+			pos = true;
+		}
+		x = Math.abs(x);
 		int mone = x;
 		if(n == 0){
 			return 1;
@@ -85,16 +90,28 @@ public class Algebra {
 		for (int i =0 ; i < n - 1 ; i++){
 			mone = times(mone, x);
 		}
+		if(pos == false){
+			return minus(0, mone);
+		}
 		return mone;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		Boolean pos = false;
+		if((x1 < 0 && x2 < 0) || (x1 > 0 && x2 > 0)){
+			pos = true;
+		}
+		x1 = Math.abs(x1);
+		x2 = Math.abs(x2);
 		int mone = 0;
 		int x = x1;
 		while (x >= x2) {
 			x = minus(x, x2);
 			mone++;
+		}
+		if(pos == false){
+			return minus(0, mone);
 		}
 		return mone;
 	}
@@ -113,6 +130,7 @@ public class Algebra {
         if (x == 1) {
 			return 1;
 		}
+		
 		int last = 0;
 		for (int i = 0 ; i < x ; i++){
 			if (x == times(i,i)){
