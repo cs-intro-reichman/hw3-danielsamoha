@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -28,22 +30,63 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
+		if (str1.length() != str2.length()){
+			return false;
+		}
+		Character list[] = new Character[str1.length()];
+		for (int i = 0; i < str1.length(); i++){
+			list[i] = str1.charAt(i);
+		}
+		for (int i = 0; i < str2.length(); i++){
+			Boolean k = false;
+			for (int j = 0; j < list.length && k == false; j++){
+				if (list[j] != null && list[j] == str2.charAt(i)) {
+					list[j] = null;
+					k = true;
+				}
+			}
+			if (k == false) {
+				return false;
+			}
+		}
+		for (int i = 0; i < list.length; i++){
+			if(list[i] != null){
+				return false;
+			}
+		}
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		StringBuilder newstring = new StringBuilder();
+		for (int i = 0; i < str.length();i++){
+			char r = str.charAt(i);
+			if (Character.isLetter(r)) {
+				newstring.append(r);
+			}
+		}
+		String f = newstring.toString().toLowerCase();
+		return f;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		StringBuilder newstring = new StringBuilder();
+		Random rand = new Random();
+		str = preProcess(str);
+		if (str.length() == 0) {
+            return "";
+        }
+		int r = rand.nextInt(str.length());
+		newstring.append(str.substring(r, str.length()));
+		newstring.append(str.substring(0, r));
+		String n = newstring.toString();
+		return n;
 	}
 }
