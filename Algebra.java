@@ -25,21 +25,33 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		int mone = 0;
-		for (int i =0 ; i < x1 + x2 ; i++){
-			mone++;
+		int mone = x1;
+		if (x2 > 0){
+			for (int i =0 ; i <x2 ; i++){
+			    mone++;
+		    }
 		}
+		else{
+			for (int i =0 ; i > x2 ; i--){
+			    mone--;
+		    }
+		}
+		
 		return mone;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		int mone = 0;
-		for (int i =0 ; i < x1 ; i++){
-			mone++;
+		int mone = x1;
+		if (x2 > 0){
+			for (int i =0 ; i <x2 ; i++){
+			    mone--;
+		    }
 		}
-		for (int i =0 ; i < x2 ; i++){
-			mone--;
+		else{
+			for (int i =0 ; i > x2 ; i--){
+			    mone++;
+		    }
 		}
 		return mone;
 	}
@@ -47,17 +59,29 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int mone = 0;
-		for (int i =0 ; i < x2 ; i++){
-			for (int j =0 ; j < x1 ; j++){
-			    mone++;
+		if((x1 < 0 && x2 < 0) || (x1 > 0 && x2 > 0)){
+			for (int i =0 ; i < Math.abs(x2) ; i++){
+			    for (int j =0 ; j < Math.abs(x1) ; j++){
+			        mone++;
+		        }
 		    }
 		}
+		else{
+			for (int i =0 ; i < Math.abs(x2) ; i++){
+			    for (int j =0 ; j < Math.abs(x1) ; j++){
+			         mone--;
+		        }
+	        }
+	    }
 		return mone;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int mone = x;
+		if(n == 0){
+			return 1;
+		}
 		for (int i =0 ; i < n - 1 ; i++){
 			mone = times(mone, x);
 		}
@@ -86,6 +110,9 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
+        if (x == 1) {
+			return 1;
+		}
 		int last = 0;
 		for (int i = 0 ; i < x ; i++){
 			if (x == times(i,i)){
